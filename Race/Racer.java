@@ -26,30 +26,30 @@ public class Racer implements Runnable {
 		// prioritize thread to be == speed
 		Thread.currentThread().setPriority(speed);
 
-		for (i = 0; i < 100; i++) {
+		for (i = 1; i <= 100; i++) {
 			System.out.println(String.format("Runner %d ran %d meters", id, i));
+			if (i == 100) { // customized printings for each finished racer
+				track.setFinishedRacers();
+				switch (track.getFinishedRacers()) {
+				case 1: {
+					System.out.println(String.format("Runner %d finished %dst", id, track.getFinishedRacers()));
+					break;
+				}
+				case 2: {
+					System.out.println(String.format("Runner %d finished %dnd", id, track.getFinishedRacers()));
+					break;
+				}
+				case 3: {
+					System.out.println(String.format("Runner %d finished %drd", id, track.getFinishedRacers()));
+					break;
+				}
+				default:
+					System.out.println(String.format("Runner %d finished %dth", id, track.getFinishedRacers()));
+					break;
+				}
+			}
 		}
 
-		if (i == 100) { // customized printings for each finished racer
-			track.setFinishedRacers();
-			switch (track.getFinishedRacers()) {
-			case 1: {
-				System.out.println(String.format("Runner %d finished %dst", id, track.getFinishedRacers()));
-				break;
-			}
-			case 2: {
-				System.out.println(String.format("Runner %d finished %dnd", id, track.getFinishedRacers()));
-				break;
-			}
-			case 3: {
-				System.out.println(String.format("Runner %d finished %drd", id, track.getFinishedRacers()));
-				break;
-			}
-			default:
-				System.out.println(String.format("Runner %d finished %dth", id, track.getFinishedRacers()));
-				break;
-			}
-		}
 	}
 
 	@Override
